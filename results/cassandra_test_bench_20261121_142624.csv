@@ -1,0 +1,7 @@
+db,workload,config,threads,ops,errors,wall_s,throughput_ops_s,mean_ms,p50_ms,p95_ms,p99_ms,max_ms
+cassandra,bulk_load,QUORUM,64,10000,0,14.873,672.4,,,,,
+cassandra,write_single,LOCAL_ONE,8,10000,0,29.859,334.9,23.827,18.053,59.571,123.575,300.307
+cassandra,read_point,LOCAL_ONE,8,10000,0,78.058,128.1,62.4,18.853,485.432,742.651,1152.394
+cassandra,read_partition,LOCAL_ONE,8,10000,0,99.763,100.2,79.762,44.361,300.25,844.371,2092.636
+cassandra,update_status,LOCAL_ONE,8,10000,0,98.076,102.0,78.381,46.585,290.885,678.421,1029.954
+cassandra,mixed_80_20,LOCAL_ONE,8,10000,0,73.936,135.3,59.096,35.309,177.306,540.271,1211.852

@@ -1,0 +1,110 @@
+{
+  "meta": {
+    "date": "2026-11-21T14:18:16",
+    "nodes": [
+      "10.13.227.69",
+      "127.0.0.1"
+    ],
+    "rf": 2,
+    "rows": 10000,
+    "clients": 1000,
+    "ops": 10000,
+    "warmup": 2000,
+    "seed": 42,
+    "python": "3.12.0",
+    "driver": "3.30.1",
+    "client_host": "DESKTOP-ALFAFMQ"
+  },
+  "results": [
+    {
+      "db": "cassandra",
+      "workload": "bulk_load",
+      "config": "QUORUM",
+      "threads": 64,
+      "ops": 10000,
+      "errors": 0,
+      "wall_s": 14.873,
+      "throughput_ops_s": 672.4,
+      "mean_ms": null,
+      "p50_ms": null,
+      "p95_ms": null,
+      "p99_ms": null,
+      "max_ms": null
+    },
+    {
+      "db": "cassandra",
+      "workload": "write_single",
+      "config": "LOCAL_ONE",
+      "threads": 8,
+      "ops": 10000,
+      "errors": 0,
+      "wall_s": 29.859,
+      "throughput_ops_s": 334.9,
+      "mean_ms": 23.827,
+      "p50_ms": 18.053,
+      "p95_ms": 59.571,
+      "p99_ms": 123.575,
+      "max_ms": 300.307
+    },
+    {
+      "db": "cassandra",
+      "workload": "read_point",
+      "config": "LOCAL_ONE",
+      "threads": 8,
+      "ops": 10000,
+      "errors": 0,
+      "wall_s": 78.058,
+      "throughput_ops_s": 128.1,
+      "mean_ms": 62.4,
+      "p50_ms": 18.853,
+      "p95_ms": 485.432,
+      "p99_ms": 742.651,
+      "max_ms": 1152.394
+    },
+    {
+      "db": "cassandra",
+      "workload": "read_partition",
+      "config": "LOCAL_ONE",
+      "threads": 8,
+      "ops": 10000,
+      "errors": 0,
+      "wall_s": 99.763,
+      "throughput_ops_s": 100.2,
+      "mean_ms": 79.762,
+      "p50_ms": 44.361,
+      "p95_ms": 300.25,
+      "p99_ms": 844.371,
+      "max_ms": 2092.636
+    },
+    {
+      "db": "cassandra",
+      "workload": "update_status",
+      "config": "LOCAL_ONE",
+      "threads": 8,
+      "ops": 10000,
+      "errors": 0,
+      "wall_s": 98.076,
+      "throughput_ops_s": 102.0,
+      "mean_ms": 78.381,
+      "p50_ms": 46.585,
+      "p95_ms": 290.885,
+      "p99_ms": 678.421,
+      "max_ms": 1029.954
+    },
+    {
+      "db": "cassandra",
+      "workload": "mixed_80_20",
+      "config": "LOCAL_ONE",
+      "threads": 8,
+      "ops": 10000,
+      "errors": 0,
+      "wall_s": 73.936,
+      "throughput_ops_s": 135.3,
+      "mean_ms": 59.096,
+      "p50_ms": 35.309,
+      "p95_ms": 177.306,
+      "p99_ms": 540.271,
+      "max_ms": 1211.852
+    }
+  ]
+}
