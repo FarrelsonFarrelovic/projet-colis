@@ -1,0 +1,2 @@
+sgbd,mode,rows,ops_per_sec,p50_ms,p95_ms,p99_ms
+postgres,insert_single,500,26.69,30.237,77.481,153.597
