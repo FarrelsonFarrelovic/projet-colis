@@ -1,0 +1,16 @@
+services:
+  pg-primary:
+    image: postgres:16
+    container_name: pg-primary
+    cpus: 2.0
+    mem_limit: 3g
+    environment:
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: colis
+    command: postgres -c wal_level=replica -c max_wal_senders=5 -c hot_standby=on -c shared_buffers=768MB
+    ports: ["5432:5432"]
+    volumes:
+      - pgp_data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
+volumes:
+  pgp_data:
