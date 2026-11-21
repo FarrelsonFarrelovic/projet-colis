@@ -1,0 +1,22 @@
+services:
+  pg-replica:
+    image: postgres:16
+    container_name: pg-replica
+    cpus: 2.0
+    mem_limit: 3g
+    environment:
+      PGPASSWORD: repl
+    ports: ["5432:5432"]
+    volumes:
+      - pgr_data:/var/lib/postgresql/data
+    entrypoint: >
+      bash -c "
+      until pg_isready -h ${PRIMARY_IP} -U postgres; do sleep 2; done;
+      if [ ! -s /var/lib/postgresql/data/PG_VERSION ]; then
+        pg_basebackup -h ${PRIMARY_IP} -U replicator -D /var/lib/postgresql/data -Fp -Xs -P -R;
+      fi;
+      chown -R postgres:postgres /var/lib/postgresql/data;
+      chmod 700 /var/lib/postgresql/data;
+      exec gosu postgres postgres -c hot_standby=on"
+volumes:
+  pgr_data:
