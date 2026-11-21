@@ -1,0 +1,40 @@
+x-cass-env: &cass-env
+  CASSANDRA_CLUSTER_NAME: colis_cluster
+  CASSANDRA_SEEDS: cass1
+  CASSANDRA_DC: datacenter1
+  CASSANDRA_ENDPOINT_SNITCH: GossipingPropertyFileSnitch
+  MAX_HEAP_SIZE: 512M
+  HEAP_NEWSIZE: 128M
+
+x-healthcheck: &hc
+  test: ["CMD-SHELL", "cqlsh -e 'describe keyspaces' || exit 1"]
+  interval: 30s
+  timeout: 20s
+  retries: 30
+  start_period: 60s
+
+services:
+  cass1:
+    image: cassandra:4.1
+    container_name: cass1
+    environment: *cass-env
+    ports: ["9042:9042"]
+    volumes: [cass1_data:/var/lib/cassandra]
+    healthcheck: *hc
+  cass2:
+    image: cassandra:4.1
+    container_name: cass2
+    environment: *cass-env
+    volumes: [cass2_data:/var/lib/cassandra]
+    depends_on:
+      cass1: {condition: service_healthy}
+    healthcheck: *hc
+  cass3:
+    image: cassandra:4.1
+    container_name: cass3
+    environment: *cass-env
+    volumes: [cass3_data:/var/lib/cassandra]
+    depends_on:
+      cass2: {condition: service_healthy}
+
+volumes: {cass1_data: {}, cass2_data: {}, cass3_data: {}} 
