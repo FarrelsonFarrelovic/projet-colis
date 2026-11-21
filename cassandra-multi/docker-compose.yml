@@ -1,0 +1,22 @@
+services:
+  cassandra:
+    image: cassandra:4.1
+    container_name: cass-${NODE_NAME}
+    restart: unless-stopped
+    environment:
+      CASSANDRA_CLUSTER_NAME: colis_cluster
+      CASSANDRA_DC: datacenter1
+      CASSANDRA_RACK: rack-${NODE_NAME}
+      CASSANDRA_ENDPOINT_SNITCH: GossipingPropertyFileSnitch
+      CASSANDRA_BROADCAST_ADDRESS: ${HOST_IP}
+      CASSANDRA_BROADCAST_RPC_ADDRESS: ${HOST_IP}
+      CASSANDRA_SEEDS: ${SEED_IP}
+      MAX_HEAP_SIZE: 1G
+      HEAP_NEWSIZE: 256M
+    ports:
+      - "7000:7000"
+      - "9042:9042"
+    volumes:
+      - cass_data:/var/lib/cassandra
+volumes:
+  cass_data: {}
